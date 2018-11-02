@@ -6,7 +6,7 @@ namespace Factory
     {
         static void Main(string[] args)
         {
-            Logistics logistics = null;
+            Factory logistics = null;
             // load config from a file
             string config = "box";
             switch (config)
@@ -18,8 +18,10 @@ namespace Factory
                     logistics = new RoadLogistics();
                     break;
             }
-            if(logistics!=null)
+            if (logistics != null)
                 Console.WriteLine(logistics.planDelevery());
+
+            
             
         }
     }
@@ -31,21 +33,24 @@ namespace Factory
 
     class Truck : ITransport
     {
-        public string delevery(){
+        public string delevery()
+        {
             return "Delevery by land in a box";
         }
     }
 
     class Ship : ITransport
     {
-        public string delevery(){
+        public string delevery()
+        {
             return "Delevery by sea in a container";
         }
     }
 
-    abstract class Logistics
+    abstract class Factory
     {
-        public string planDelevery(){
+        public string planDelevery()
+        {
             ITransport transport = createTransport();
             return "Have plan " + transport.delevery();
         }
@@ -53,18 +58,19 @@ namespace Factory
         public abstract ITransport createTransport();
     }
 
-    class RoadLogistics : Logistics
+    class RoadLogistics : Factory
     {
-        public override ITransport createTransport(){
+        public override ITransport createTransport()
+        {
             return new Truck();
         }
     }
 
-    class SeaLogistics : Logistics
+    class SeaLogistics : Factory
     {
-        public override ITransport createTransport(){
+        public override ITransport createTransport()
+        {
             return new Ship();
         }
     }
-
 }

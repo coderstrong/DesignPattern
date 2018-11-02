@@ -21,6 +21,21 @@ namespace AbstractFactory
             if(logistics!=null)
                 Console.WriteLine(logistics.planDelevery());
             
+            Factory factory = null;
+            string config2 = "VN";
+            switch (config2)
+            {
+                case "VN":
+                    factory = new VNFactory();
+                    break;
+                case "US":
+                    factory = new USFactory();
+                    break;
+            }
+            if(factory!=null){
+                Address vnadd = factory.createAddress();
+                Phone vnphone = factory.createPhone();
+            }
         }
     }
 
@@ -91,6 +106,113 @@ namespace AbstractFactory
 
         public override IWarehouse createWarehouse(){
             return new Pallet();
+        }
+    }
+
+    // Example 2
+    // manager Address and Phone
+    public abstract class Address
+    {
+        public string address { get; set; }
+        public abstract string validateAddress();
+    }
+
+    public abstract class Phone
+    {
+        public string phone { get; set; }
+        public abstract string validatePhone();
+    }
+
+    public abstract class Factory
+    {
+        public abstract Phone createPhone();
+
+        public abstract Address createAddress();
+    }
+
+    public class VNAddress : Address
+    {
+        public override string validateAddress()
+        {
+            if (this.address.Contains("VN"))
+            {
+                return this.address;
+            }
+            else
+            {
+                return "Your addess invaild!";
+            }
+        }
+    }
+
+    public class USAddress : Address
+    {
+        public override string validateAddress()
+        {
+            if (this.address.Contains("US"))
+            {
+                return this.address;
+            }
+            else
+            {
+                return "Your addess invaild!";
+            }
+        }
+    }
+
+    public class VNPhone : Phone
+    {
+        public override string validatePhone()
+        {
+            if (this.phone.Contains("+84"))
+            {
+                return this.phone;
+            }
+            else
+            {
+                return "Your phone invaild!";
+            }
+        }
+    }
+
+    public class USPhone : Phone
+    {
+        public override string validatePhone()
+        {
+            if (this.phone.Contains("+1"))
+            {
+                return this.phone;
+            }
+            else
+            {
+                return "Your phone invaild!";
+            }
+        }
+    }
+
+    public class VNFactory : Factory
+    {
+        public override Address createAddress()
+        {
+            return new VNAddress();
+        }
+
+        public override Phone createPhone()
+        {
+            return new VNPhone();
+        }
+    }
+
+    public class USFactory : Factory
+    {
+        public override Phone createPhone()
+        {
+            return new USPhone();
+        }
+
+        public override Address createAddress()
+        {
+            return new USAddress();
         }
     }
 }
