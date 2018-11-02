@@ -26,10 +26,10 @@ namespace AbstractFactory
             switch (config2)
             {
                 case "VN":
-                    factory = new VNFactory();
+                    factory = new VNCountry();
                     break;
                 case "US":
-                    factory = new USFactory();
+                    factory = new USCountry();
                     break;
             }
             if(factory!=null){
@@ -190,7 +190,7 @@ namespace AbstractFactory
         }
     }
 
-    public class VNFactory : Factory
+    public class VNCountry : Factory
     {
         public override Address createAddress()
         {
@@ -203,7 +203,7 @@ namespace AbstractFactory
         }
     }
 
-    public class USFactory : Factory
+    public class USCountry : Factory
     {
         public override Phone createPhone()
         {

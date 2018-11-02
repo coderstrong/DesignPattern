@@ -20,9 +20,6 @@ namespace Factory
             }
             if (logistics != null)
                 Console.WriteLine(logistics.planDelevery());
-
-            
-            
         }
     }
 
