@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 namespace Flyweight
 {
+
+    ///
+    /// TreeType share help save RAM
+    ///
     class Program
     {
         static void Main(string[] args)
@@ -50,6 +54,6 @@ namespace Flyweight
     }
 
     public class Forest{
-        
+
     }
 }
